@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"
-      rel="stylesheet" />
+    <link href="" rel="stylesheet" />
 
     <link rel="stylesheet" href="/dist/output.css" />
 
@@ -16,14 +12,110 @@
   </head>
 
   <body>
-    <div
-      id="main"
-      class="w-full h-96 bg-center bg-no-repeat objet-contains bg-fond-portefolio">
-      <div id="home"></div>
+    <div id="main">
+      <!--Container principal-->
 
-      <section id="projet"></section>
-      <div id="compétences"></div>
-      <section id="ressources"></section>
+      <!--Container de mon intro -->
+
+      <div id="home" class="w-screen h-auto">
+        <div
+          id="presentation"
+          class="flex flex-col justify-center items-center text-center w-screen h-[800px] bg-center bg-no-repeat object-contain bg-fond-portefolio">
+          <h1
+            class="font-screen text-3xl decoration-white tracking-widest my-8">
+            Alexandre GUERILLOT
+          </h1>
+
+          <p
+            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24">
+            Développeur Full stack
+          </p>
+
+          <span
+            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24 animate-pulse"
+            >Javascript</span
+          >
+          <span
+            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24">
+            Junior
+          </span>
+        </div>
+      </div>
+
+      <div class="bg-slate-300 border-x-rose-500w-screen w-screen h-[400px] flex flex-col justify-center items-center">
+        <h3
+          class="font-screen text-2xl underline m-6 w-[600px] text-center my-4">
+          Résumé
+        </h3>
+
+        <p
+          class="font-dev tracking-wider text-justify w-[600px] leading-10 decoration-solid indent-8">
+          En reconversion professionnelle, j'ai choisi le métier de Développeur
+          Web pour la créativité et la rigueur nécessaire à la mise en oeuvre de
+          solutions. Pragmatique et ouvert d'esprit, rejoindre une commnauté où
+          les savoirs se partagent à du sens pour moi. On peut désormais
+          répondre plus vite et plus certaineement aux challenges fixés par
+          l'emploi de nouvelles technologies. Anticipant quelques prespectives à
+          venir, j'intégrerai la réalité augmentée à mon "scope"
+          professionnelle.
+        </p>
+    
+      </div>
+
+
+      <div id="competences-animation" class="w-screen h-[700px]">
+        <!--  animation css pour affichage lang dev'-->
+
+        <div id="competences" class="animate">
+          <span style="--i: 0"> CSS</span>
+          <span style="--i: 1"></span>
+          <span style="--i: 2"></span>
+          <span style="--i: 3"></span>
+          <span style="--i: 4">HTML</span>
+          <span style="--i: 5"></span>
+          <span style="--i: 6"></span>
+          <span style="--i: 7">PHP</span>
+          <span style="--i: 8"></span>
+          <span style="--i: 9">Taillwind</span>
+          <span style="--i: 10"></span>
+          <span style="--i: 11"></span>
+          <span style="--i: 12">JS</span>
+          <span style="--i: 13"></span>
+          <span style="--i: 14"></span>
+        </div>
+      </div>
+
+
+
+
+
+      <section id="projet" class="bk-bg-slate-300 mt-5">
+        <!--Container visu projets -->
+        <span
+          class="inline-grid grid-cols-3 gap-4 text-2xl m-auto items-center">
+          <span
+            class="inline m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress border-x-rose-500 animate-spin">
+            Projet 01</span
+          >
+          <span
+            class="m-28 w-30 h-30 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
+            Projet 01</span
+          >
+          <span
+            class="m-28 w-30 h-30 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
+            Projet 01</span
+          >
+          <span
+            class="m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-pulse">
+            Projet 01</span
+          >
+          <span
+            class="m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-bounce">
+            Projet 01</span>
+        
+      </section>
+
+      <section id="ressources" class="w-48 h-64"></section>
       <section id="contact"></section>
     </div>
 

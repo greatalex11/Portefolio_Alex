@@ -1,3 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Tektur:wght@500;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Revalia&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+
+@font-face {
+  font-family: "Oxygen";
+  src: url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+}
+
+@font-face {
+  font-family: "Tektur";
+  src: url("https://fonts.googleapis.com/css2?family=Tektur&display=swap");
+}
+*/
+
+#competences {
+  width: 250px;
+  height: 250px;
+  display: flex;
+
+  justify-content: center;
+
+  margin-left: 350px;
+  margin-top: 290px;
+
+  align-items: center;
+  background-color: silver;
+  border-radius: 50%;
+}
+
+#competences span {
+  margin-left: 350px;
+  margin-top: 45px;
+
+  position: absolute;
+  left: 0;
+  width: 36px;
+  height: 6px;
+  background: #2c4786;
+  border-radius: 8px;
+  -webkit-transform-origin: 120px;
+
+  transform: scale(2.2) rotate(calc(var(--i) * 360deg / 15));
+
+  animation: animate 2s linear infinite;
+
+  animation-delay: calc(var(--i) * (2s / 15));
+}
+
+@keyframes animate {
+  0% {
+    background: #0ef;
+  }
+  25% {
+    background: #2c4766;
+  }
+}

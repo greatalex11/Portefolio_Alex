@@ -9,6 +9,12 @@ module.exports = {
 
         "fond-luxe": "url('/src/Assets/luxe.jpg')",
       },
+
+      fontFamily: {
+        com: "Oxygen",
+        dev: "Tektur",
+        screen: "Revalia",
+      },
     },
   },
   plugins: [],
