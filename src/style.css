@@ -6,6 +6,7 @@
 
 @tailwind base;
 @tailwind components;
+
 @tailwind utilities;
 
 /*
@@ -22,24 +23,21 @@
 */
 
 #competences {
-  width: 250px;
-  height: 250px;
+  width: 240px;
+  height: 240px;
   display: flex;
-
   justify-content: center;
-
-  margin-left: 350px;
-  margin-top: 290px;
-
+  padding-bottom: 50px;
+  margin-left: 450px;
+  margin-top: 340px;
   align-items: center;
   background-color: silver;
   border-radius: 50%;
 }
 
 #competences span {
-  margin-left: 350px;
-  margin-top: 45px;
-
+  margin-left: 450px;
+  margin-top: 145px;
   position: absolute;
   left: 0;
   width: 36px;
@@ -48,11 +46,11 @@
   border-radius: 8px;
   -webkit-transform-origin: 120px;
 
-  transform: scale(2.2) rotate(calc(var(--i) * 360deg / 15));
+  transform: scale(2.2) rotate(calc(var(--i) * 360deg / 13));
 
   animation: animate 2s linear infinite;
 
-  animation-delay: calc(var(--i) * (2s / 15));
+  animation-delay: calc(var(--i) * (2s / 13));
 }
 
 @keyframes animate {

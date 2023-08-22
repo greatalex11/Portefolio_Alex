@@ -10,79 +10,106 @@
 
     <title>Portefolio Alex G</title>
   </head>
-
+  
   <body>
     <div id="main">
       <!--Container principal-->
-
+      
       <!--Container de mon intro -->
-
-      <div id="home" class="w-screen h-auto">
-        <div
-          id="presentation"
-          class="flex flex-col justify-center items-center text-center w-screen h-[800px] bg-center bg-no-repeat object-contain bg-fond-portefolio">
-          <h1
-            class="font-screen text-3xl decoration-white tracking-widest my-8">
-            Alexandre GUERILLOT
-          </h1>
-
-          <p
-            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24">
-            Développeur Full stack
-          </p>
-
-          <span
-            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24 animate-pulse"
-            >Javascript</span
-          >
-          <span
-            class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24">
-            Junior
-          </span>
+      
+      <div id="home" class="flex flex-col justify-center align-middle w-screen h-[800px] bg-center bg-no-repeat object-contain bg-fond-portefolio">
+        <div class="flex justify-end">
+        <img class="scale-150 skew-x-6 mr-40" src="./Assets/profileAlex.png" width="132" height="135" alt="photo personnelle de Alexandre GUERILLOT">
         </div>
-      </div>
+        <div
+        id="presentation"
+        class="flex flex-col justify-center items-center text-center">
+        <h1
+        class="font-screen text-3xl decoration-white tracking-widest my-8">
+        Alexandre GUERILLOT
+        </h1>
+      
+      <p
+      class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24">
+      Développeur Full stack
+    </p>
+    
+    <span
+    class="w-[600px] font-screen text-3xl capitalize text-[#c2410c] my-8 leading-10m-24 animate-pulse"
+    >Javascript</span
+    >
+    
+</div>
+</div>
 
-      <div class="bg-slate-300 border-x-rose-500w-screen w-screen h-[400px] flex flex-col justify-center items-center">
-        <h3
+<div class="bg-slate-300 border-x-rose-500w-screen w-screen h-[400px] flex flex-col justify-center items-center">
+  <h3
           class="font-screen text-2xl underline m-6 w-[600px] text-center my-4">
           Résumé
         </h3>
 
         <p
           class="font-dev tracking-wider text-justify w-[600px] leading-10 decoration-solid indent-8">
-          En reconversion professionnelle, j'ai choisi le métier de Développeur
+          
+          J'ai choisi le métier de Développeur
           Web pour la créativité et la rigueur nécessaire à la mise en oeuvre de
           solutions. Pragmatique et ouvert d'esprit, rejoindre une commnauté où
-          les savoirs se partagent à du sens pour moi. On peut désormais
-          répondre plus vite et plus certaineement aux challenges fixés par
-          l'emploi de nouvelles technologies. Anticipant quelques prespectives à
-          venir, j'intégrerai la réalité augmentée à mon "scope"
-          professionnelle.
+          les savoirs se partagent à du sens pour moi. Les nouvelles technologies nous permettent de répondre plus vite 
+          et plus certaineement au défis de notre temps. Très prochainement, j'intégrerai la réalité augmentée à mon "scope"
+          professionnel.
+          
         </p>
     
       </div>
 
+                                      <!--  animation css pour affichage lang dev'-->
 
-      <div id="competences-animation" class="w-screen h-[700px]">
-        <!--  animation css pour affichage lang dev'-->
+      <div id="competences-animation" class="w-screen h-[700px] inline-flex ">
 
-        <div id="competences" class="animate">
-          <span style="--i: 0"> CSS</span>
+        <div id="competences" class="animate" class="absolute z-10 w-56 h-auto">
+
+          <span style="--i: 0"></span>
+                 
           <span style="--i: 1"></span>
           <span style="--i: 2"></span>
           <span style="--i: 3"></span>
-          <span style="--i: 4">HTML</span>
+         
+          <span style="--i: 4"></span>
           <span style="--i: 5"></span>
           <span style="--i: 6"></span>
-          <span style="--i: 7">PHP</span>
+          <span style="--i: 7"></span>
           <span style="--i: 8"></span>
-          <span style="--i: 9">Taillwind</span>
+          <span style="--i: 9"></span>
           <span style="--i: 10"></span>
           <span style="--i: 11"></span>
-          <span style="--i: 12">JS</span>
-          <span style="--i: 13"></span>
-          <span style="--i: 14"></span>
+          <span style="--i: 12"></span>
+                   
         </div>
+
+        <div id="labelLanguage" class="absolute z-20 ">
+
+          <span class="inline-grid grid-cols-4 gap-56 relative top-32 left-48">
+            
+            <span></span>
+            <span>PHP</span>
+            <span>HTML</span>
+            <span></span>
+            <span>CSS</span>
+            <span></span>
+            <span></span>
+            <span>PHP</span>
+            <span>CSS</span>
+            <span></span>
+            <span></span>
+            <span>CSS</span>
+            <span></span>
+            <span>HTML</span>
+            <span>JS</span>
+            <span></span>           
+          </span>
+
+        </div>
+                
       </div>
 
 
@@ -94,28 +121,36 @@
         <span
           class="inline-grid grid-cols-3 gap-4 text-2xl m-auto items-center">
           <span
-            class="inline m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress border-x-rose-500 animate-spin">
+            class="inline m-10 w-10 h-10 bg-sky-800 backdrop-hue-rotate-180 cursor-progress border-x-rose-500 animate-spin">
             Projet 01</span
           >
           <span
-            class="m-28 w-30 h-30 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
+            class=" m-10 w-10 h-10text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
             Projet 01</span
           >
           <span
-            class="m-28 w-30 h-30 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
+            class=" m-10 w-10 h-10text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
             Projet 01</span
           >
           <span
-            class="m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-pulse">
+            class=" m-10 w-10 h-10 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-pulse">
             Projet 01</span
           >
           <span
-            class="m-28 w-30 h-30 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-bounce">
+            class=" m-10 w-10 h-10 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-bounce">
             Projet 01</span>
         
       </section>
 
-      <section id="ressources" class="w-48 h-64"></section>
+
+      <section id="projets" class="w-48 h-64">
+
+
+
+      </section>
+
+
+
       <section id="contact"></section>
     </div>
 
