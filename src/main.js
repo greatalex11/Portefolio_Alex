@@ -9,7 +9,7 @@ function createPathStrings(filename) {
    const basePath = "../img/skybox/";
    const baseFilename = basePath + filename;
    const fileType = ".png";
-   const sides = ["ft", "bk", "up", "dn", "rt", "lf"];
+   const sides = ["ft", "bk", "up", "dn", "rt", "lf"];//ag = bk
    const pathStrings = sides.map((side) => {
      return baseFilename + "_" + side + fileType;
    });
@@ -32,6 +32,8 @@ function createPathStrings(filename) {
    let skyboxGeo = new THREE.BoxGeometry(200, 200, 200);
    skybox = new THREE.Mesh(skyboxGeo, materialArray);
    scene.add(skybox);
+
+
  }
  
  function init() {
@@ -39,8 +41,8 @@ function createPathStrings(filename) {
    camera = new THREE.PerspectiveCamera(
      50,
      window.innerWidth / window.innerHeight,
-     0.1,
-     1000
+     1,
+     10000
    );
  
    setSkyBox();
@@ -64,17 +66,28 @@ function createPathStrings(filename) {
    const geometry = new THREE.SphereGeometry(5, 32, 32);
    const loader = new THREE.TextureLoader();
    const earthTexture = loader.load(texture);
-   const material = new THREE.MeshBasicMaterial({ map: earthTexture });
- 
+   const material = new THREE.MeshBasicMaterial({ map: earthTexture }); 
    sphere = new THREE.Mesh(geometry, material);
+
+   
+   let AlexMap = new THREE.BoxGeometry(10, 10, 10);
+   const materialAG = new THREE.TextureLoader().load('./img/profileAlex.png');
+   var materialCubeAG = new THREE.MeshBasicMaterial({ map: materialAG });
+   cube2= new THREE.Mesh(AlexMap,materialCubeAG);   
+   cube2.position.x = 60;
+   cube2.position.y = 30;
+   cube2.position.z = -80;
+   scene.add(cube2);
+
  }
  
  function changeTextQuality(quality) {
    switch (quality) {
      case "high":
        scene.remove(sphere);
-       loadTexture("../img/earth_hd.jpg");
-       scene.add(sphere);
+       loadTexture("../img/../img/earth_hd.jpg");//"../img/earth_hd.jpg"
+       scene.add(sphere);   
+
        break;
      case "low":
        scene.remove(sphere);
@@ -89,6 +102,9 @@ function createPathStrings(filename) {
  function animate() {
    requestAnimationFrame(animate);
    sphere.rotation.y += 0.002;
+   cube2.rotation.x += 0.01;
+   cube2.rotation.y += 0.01;
+
    controls.update();
    renderer.render(scene, camera);
  }
@@ -101,7 +117,7 @@ function createPathStrings(filename) {
  ////
 
 
-let scene, camera, renderer, sphere, controls, skybox;
+let scene, camera, renderer, sphere, controls, skybox, cube2;
 let skyboxImage = "space";
 const sdBtn = document.querySelector(".sd");
 const hdBtn = document.querySelector(".hd");
