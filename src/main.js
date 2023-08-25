@@ -39,7 +39,7 @@ function createPathStrings(filename) {
  function init() {
    scene = new THREE.Scene();
    camera = new THREE.PerspectiveCamera(
-     50,
+     60,
      ratio,
      1,
      10000
@@ -47,8 +47,7 @@ function createPathStrings(filename) {
  
    setSkyBox();
    loadTexture("./img/earth_texture.jpg");
-   scene.add(sphere);
- 
+   scene.add(sphere); 
    
    let width = ratio * hauteur;
    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -72,13 +71,13 @@ function createPathStrings(filename) {
    sphere = new THREE.Mesh(geometry, material);
 
    
-   let AlexMap = new THREE.BoxGeometry(10, 10, 10);
+   let AlexMap = new THREE.BoxGeometry(12, 12, 12);
    const materialAG = new THREE.TextureLoader().load('./img/profileAlex.png');
    var materialCubeAG = new THREE.MeshBasicMaterial({ map: materialAG });
    cube2= new THREE.Mesh(AlexMap,materialCubeAG);   
-   cube2.position.x = 60;
+   cube2.position.x = 65;
    cube2.position.y = 22;
-   cube2.position.z = -80;
+   cube2.position.z = -70;
    scene.add(cube2);
 
  }
