@@ -19,8 +19,5 @@
   "homepage": "https://github.com/greatalex11/Portefolio_Alex#readme",
   "devDependencies": {
     "tailwindcss": "^3.3.3"
-  },
-  "dependencies": {
-    "three": "^0.155.0"
   }
 }

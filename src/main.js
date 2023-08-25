@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 // import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 // Scene, Camera, Renderer
 function createPathStrings(filename) {
-   const basePath = "../img/skybox/";
+   const basePath = "./img/skybox/";
    const baseFilename = basePath + filename;
    const fileType = ".png";
    const sides = ["ft", "bk", "up", "dn", "rt", "lf"];//ag = bk
@@ -40,18 +40,20 @@ function createPathStrings(filename) {
    scene = new THREE.Scene();
    camera = new THREE.PerspectiveCamera(
      50,
-     window.innerWidth / window.innerHeight,
+     ratio,
      1,
      10000
    );
  
    setSkyBox();
-   loadTexture("../img/earth_texture.jpg");
+   loadTexture("./img/earth_texture.jpg");
    scene.add(sphere);
  
+   
+   let width = ratio * hauteur;
    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-   renderer.setSize(window.innerWidth/4, window.innerHeight/4);
-   document.body.appendChild(renderer.domElement);
+   renderer.setSize(width,hauteur);
+   document.getElementById("terre").appendChild(renderer.domElement);
    renderer.domElement.id = "c";
  
    controls = new OrbitControls(camera, renderer.domElement);
@@ -85,13 +87,13 @@ function createPathStrings(filename) {
    switch (quality) {
      case "high":
        scene.remove(sphere);
-       loadTexture("../img/../img/earth_hd.jpg");//"../img/earth_hd.jpg"
+       loadTexture("./img/earth_hd.jpg");//"../img/earth_hd.jpg"
        scene.add(sphere);   
 
        break;
      case "low":
        scene.remove(sphere);
-       loadTexture("../img/earth_texture.jpg");
+       loadTexture("./img/earth_texture.jpg");
        scene.add(sphere);
        break;
      default:
@@ -110,9 +112,9 @@ function createPathStrings(filename) {
  }
  
  function onWindowResize() {
-   camera.aspect = window.innerWidth / window.innerHeight;
+   camera.aspect = window.innerWidth / hauteur;
    camera.updateProjectionMatrix();
-   renderer.setSize(window.innerWidth, window.innerHeight);
+   renderer.setSize(window.innerWidth, hauteur);
  }
  ////
 
@@ -125,8 +127,9 @@ const hdBtn = document.querySelector(".hd");
 sdBtn.onclick = () => changeTextQuality("low");
 hdBtn.onclick = () => changeTextQuality("high");
 
-
-window.addEventListener("resize", onWindowResize, false);
-
+let hauteur = 450;
+let ratio = window.innerWidth / hauteur;
 init();
 animate();
+window.addEventListener("resize", onWindowResize, false);
+

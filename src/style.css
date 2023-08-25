@@ -23,28 +23,20 @@
 */
 
 #competences {
-  width: 240px;
-  height: 240px;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 50px;
-  margin-left: 450px;
-  margin-top: 340px;
-  align-items: center;
+  width: 200px;
+  height: 200px;
   background-color: silver;
   border-radius: 50%;
 }
 
 #competences span {
-  margin-left: 450px;
-  margin-top: 145px;
-  position: absolute;
-  left: 0;
-  width: 36px;
-  height: 6px;
+  margin: auto;
+  position: absolute;  
+  margin-top: 100px;width: 38px;
+  height: 5px;
   background: #2c4786;
   border-radius: 8px;
-  -webkit-transform-origin: 120px;
+  -webkit-transform-origin: 100px;
 
   transform: scale(2.2) rotate(calc(var(--i) * 360deg / 13));
 
@@ -60,4 +52,10 @@
   25% {
     background: #2c4766;
   }
+}
+
+
+.swiper {
+  width: 600px;
+  height: 300px;
 }
