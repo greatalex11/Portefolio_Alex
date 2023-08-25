@@ -121,11 +121,12 @@ function createPathStrings(filename) {
 
 let scene, camera, renderer, sphere, controls, skybox, cube2;
 let skyboxImage = "space";
-const sdBtn = document.querySelector(".sd");
+
+/*const sdBtn = document.querySelector(".sd");
 const hdBtn = document.querySelector(".hd");
 
 sdBtn.onclick = () => changeTextQuality("low");
-hdBtn.onclick = () => changeTextQuality("high");
+hdBtn.onclick = () => changeTextQuality("high");*/
 
 let hauteur = 450;
 let ratio = window.innerWidth / hauteur;

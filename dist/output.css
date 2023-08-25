@@ -648,10 +648,6 @@ video {
   height: 2rem;
 }
 
-.h-\[100\%\]{
-  height: 100%;
-}
-
 .h-\[400px\]{
   height: 400px;
 }
@@ -810,8 +806,8 @@ video {
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
-.bg-fond-portefolio{
-  background-image: url('/src/Assets/kamran-abdullayev-6eGWRC-pIqI-unsplash.jpg');
+.bg-fond-redblack{
+  background-image: url('/src/Assets/luxe.jpg');
 }
 
 .bg-center{

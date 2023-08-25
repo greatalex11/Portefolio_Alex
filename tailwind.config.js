@@ -5,9 +5,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         "fond-portefolio":
-          "url('/src/Assets/kamran-abdullayev-6eGWRC-pIqI-unsplash.jpg')",
+          "url('/src/Assets/redBk.jpg)",
 
         "fond-luxe": "url('/src/Assets/luxe.jpg')",
+        "fond-redblack" : "url('/src/Assets/luxe.jpg')",
       },
 
       fontFamily: {
