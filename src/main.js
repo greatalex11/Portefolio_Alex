@@ -77,7 +77,7 @@ function createPathStrings(filename) {
    var materialCubeAG = new THREE.MeshBasicMaterial({ map: materialAG });
    cube2= new THREE.Mesh(AlexMap,materialCubeAG);   
    cube2.position.x = 60;
-   cube2.position.y = 30;
+   cube2.position.y = 22;
    cube2.position.z = -80;
    scene.add(cube2);
 
