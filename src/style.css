@@ -21,14 +21,14 @@
   src: url("https://fonts.googleapis.com/css2?family=Tektur&display=swap");
 }
 */
-
+/*
 #competences {
   width: 200px;
   height: 200px;
   background-color: silver;
   border-radius: 50%;
-}
-
+}*/
+/*
 #competences span {
   margin: auto;
   position: absolute;  
@@ -44,7 +44,34 @@
   animation: animate 2s linear infinite;
 
   animation-delay: calc(var(--i) * (2s / 13));
+}*/
+
+#competences P {
+  margin: auto;
+  position: absolute;
+  font-size: 18px;
+  letter-spacing: 5px;
+  line-height: 30px;
+  
+  margin:55px;
+  width: 100px;
+  height: 6px;
+  background: #2c4786;
+  border-radius: 8px;
+  -webkit-transform-origin: 270px;
+
+  transform: rotate(calc(var(--i) * 360deg / 11));
+
+  animation: animate 2s linear infinite;
+
+  animation-delay: calc(var(--i) * (1s / 11));
 }
+
+/*
+span> #three{
+  transform: scale(0.5) translate(-100%, -100%);;
+  color: crimson;
+}*/
 
 @keyframes animate {
   0% {

@@ -1,15 +1,57 @@
-<!--
 <?php
+require __DIR__ . './../vendor/autoload.php';
+
 
 session_start();
-
 $envFilePath = __DIR__ . '/.env';
-$myKeyPublic 
-$myKeyPrivate
+
+if (file_exists($envFilePath)) {
+  $dotenvValues = parse_ini_file($envFilePath);
+  $myPublicKey = $dotenvValues['myKeyPublic'];
+  $myKeyPrivate = $dotenvValues['myKeyPrivate'];
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (isset($_POST['recaptcha-response'])) {
+    $url = "https://www.google.com/recaptcha/api/siteverify?secret=$myKeyPrivate&response={$_POST['recaptcha-response']}";
+    $response = file_get_contents($url);
+    /*
+     if ($response) {
+        $data = json_decode($response);
+        if ($data->success) {
+           if (checkDataForm($_POST['form'])) {
+              $message = cleanDataForm($_POST['form']);
+              $message_id = saveDataForm($_POST['form']);
+
+              $sucess = "Message de {$message['name']} envoyé et sauvegardé en base avec l'id {$message_id}";
+
+              $msgBD = returMessage();
+              $nomBD = $msgBD["nom"];
+              $emailBD = $msgBD["email"];
+              $sujetBD = $msgBD["sujet"];
+              $date = $msgBD["date"];
+              $messageBD = $msgBD["message"];
+           } else {
+              header('Location: index.php?error=formulaire-pas-bon');
+           }
+  } else {
+    header('Location: index.php?error=google-false');
+  }
+} else {
+  header('Location: index.php?error=google-reponds-pas');
+};
+
+
+/* Modification message
+if (isset($_POST["id_message"])) {
+}*/
+  }
+};
 
 ?>
 
--->
+
 
 
 <!DOCTYPE html>
@@ -19,17 +61,17 @@ $myKeyPrivate
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://www.google.com/recaptcha/enterprise.js?render=<?= $myKeyPublic ?>"></script>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=<?= $myPublicKey ?>"></script>
 
 
   <link href="" rel="stylesheet" />
-  <link rel="stylesheet" href="/dist/output.css" />
+  <link rel="stylesheet" href="./../dist/output.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="style.css" />
 
-  <script src="/src/index.js"></script>
+  <script src="index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script src="/src/swiper.js"></script>
+  <script src="swiper.js"></script>
   <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
 
   <script type="importmap">
@@ -40,7 +82,7 @@ $myKeyPrivate
         }
       }
     </script>
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="main.js"></script>
 
   <title>Portefolio Alex G</title>
 </head>
@@ -139,65 +181,83 @@ $myKeyPrivate
 
     <!--  animation css pour affichage lang dev'-->
 
-    <div id="competences-animation" class="w-full h-[700px] flex flex-row justify-items-center align-middle m-auto">
+    <div id="competences-animation" class="w-full h-[700px] flex flex-col justify-items-center align-middle m-auto p-16">
 
-      <div id="indicateurCompetences" class=" w-2/3 h-autoflex-col justify-center m-auto relative">
+      <div class="text-center">
+        <h3 class="font-screen inline text-2xl underline m-auto w-[600px] text-center my-4 ">
+          Compétences
+        </h3>
+      </div>
 
-        <div id="competences" class="animate relative  justify-center m-auto bg-center">
 
-          <span style="--i: 0"></span>
-          <span style="--i: 1"></span>
-          <span style="--i: 2"></span>
-          <span style="--i: 3"></span>
-          <span style="--i: 4"></span>
-          <span style="--i: 5"></span>
-          <span style="--i: 6"></span>
-          <span style="--i: 7"></span>
-          <span style="--i: 8"></span>
-          <span style="--i: 9"></span>
-          <span style="--i: 10"></span>
-          <span style="--i: 11"></span>
-          <span style="--i: 12"></span>
 
-        </div>
+      <div id="indicateurCompetences" class=" flex flex-row  m-auto">
 
-        <div id="labelLanguage" class="absolute z-30 left-[288px] bottom-[-160px]">
+        <div id="competences" class="animate w-1/2 h-auto relative left-[150px] m-auto ">
 
-          <span class="inline-grid grid-cols-4 gap-36 font-bold ">
-            <span></span>
-            <span>PHP</span>
-            <span>HTML</span>
-            <span></span>
-            <span>CSS</span>
-            <span></span>
-            <span></span>
-            <span>PHP</span>
-            <span>CSS</span>
-            <span></span>
-            <span></span>
-            <span>CSS</span>
-            <span></span>
-            <span>HTML</span>
-            <span>JS</span>
-            <span></span>
+          <span style=" --i: 0">
+            <p>JS</p>
           </span>
+
+          <span style="--i: 1">
+            <p>PHP</p>
+          </span>
+
+          <span style="--i: 2">
+            <p>HTML5</p>
+          </span>
+
+          <span style="--i: 3">
+            <p>CSS3</p>
+          </span>
+
+          <span style="--i: 4">
+            <p>MySQL</p>
+          </span>
+
+          <span style="--i: 5">
+            <P>AR.JS</P>
+          </span>
+
+          <span style="--i: 6">
+            <P id="three">THREE.JS</P>
+          </span>
+
+          <span style="--i: 7">
+            <P>Tailwind</P>
+          </span>
+
+          <span style="--i: 8">
+            <P>React</P>
+          </span>
+
+          <span style="--i: 9">
+            <P>Figma</P>
+          </span>
+
+          <span style="--i: 10">
+            <P>Symfony</P>
+          </span>
+
+        </div>
+
+        <div id="explication" class="w-1/2 text-justify mt-auto mb-auto  p-10 indent-8">
+          Inter has ruinarum varietates a Nisibi quam tuebatur accitus Vrsicinus, cui nos obsecuturos iunxerat imperiale praeceptum, dispicere litis exitialis certamina cogebatur abnuens et reclamans, adulatorum oblatrantibus turmis, bellicosus sane milesque semper et militum ductor sed forensibus iurgiis longe discretus, qui metu sui discriminis anxius cum accusatores quaesitoresque subditivos sibi consociatos ex isdem foveis cerneret emergentes, quae clam palamve agitabantur,
+          occultis Constantium litteris edocebat inplorans subsidia, quorum metu tumor notissimus Caesaris exhalaret.
         </div>
 
       </div>
 
-      <div id="explication" class="w-1/3 text-justify align-middle mt-auto mb-auto mr-32 p-8 indent-8">
-        Inter has ruinarum varietates a Nisibi quam tuebatur accitus Vrsicinus, cui nos obsecuturos iunxerat imperiale praeceptum, dispicere litis exitialis certamina cogebatur abnuens et reclamans, adulatorum oblatrantibus turmis, bellicosus sane milesque semper et militum ductor sed forensibus iurgiis longe discretus, qui metu sui discriminis anxius cum accusatores quaesitoresque subditivos sibi consociatos ex isdem foveis cerneret emergentes, quae clam palamve agitabantur,
-        occultis Constantium litteris edocebat inplorans subsidia, quorum metu tumor notissimus Caesaris exhalaret.
-      </div>
+
 
 
     </div>
 
 
-    <section id="projets" class="w-screen h-[500px] mt-46">
+    <section id="projets" class="w-screen h-[500px] mt-46 ">
 
       <!-- Slider main container -->
-      <div class="swiper" init="false">
+      <div class="swiper mt-24" init="false">
         <!-- Additional required wrapper -->
 
         <div class="swiper-wrapper">
@@ -265,7 +325,9 @@ $myKeyPrivate
             <div class="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.7)] dark:shadow-black/20 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
               <div class="flex flex-wrap">
                 <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
-                  <form>
+
+                  <form action="#" method="post">
+
                     <div class="relative mb-6" data-te-input-wrapper-init>
                       <input type="text" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput90" placeholder="Name" />
                       <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput90">Name
