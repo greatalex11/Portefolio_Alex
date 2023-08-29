@@ -81,9 +81,41 @@ span> #three{
     background: #2c4766;
   }
 }
+/*
 
-
-.swiper {
-  width: 600px;
-  height: 300px;
+.swiper{
+  width: 70%;
+  margin: 100px;
 }
+.swiper img{
+  width: 20%;
+  height: 20%;
+  background-repeat: no-repeat;
+
+}
+.swiper_thumbnail .swiper-slide{
+  cursor: pointer;
+}
+.swiper_thumbnail .swiper-slide-thumb-active{
+  outline: 2px solid #000;
+  outline-offset: -2px;
+}
+.swiper_thumbnail img{
+  vertical-align:　bottom;
+}
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+

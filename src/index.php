@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . './../vendor/autoload.php';
-
+require "repository.php";
+require "lib.php";
 
 session_start();
 $envFilePath = __DIR__ . '/.env';
@@ -61,6 +62,7 @@ if (isset($_POST["id_message"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+
   <script src="https://www.google.com/recaptcha/enterprise.js?render=<?= $myPublicKey ?>"></script>
 
 
@@ -73,6 +75,8 @@ if (isset($_POST["id_message"])) {
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="swiper.js"></script>
   <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
   <script type="importmap">
     {
@@ -254,62 +258,79 @@ if (isset($_POST["id_message"])) {
     </div>
 
 
-    <section id="projets" class="w-screen h-[500px] mt-46 ">
+    <section id="projets" class="w-screen h-[500px] mt-72 ">
 
-      <!-- Slider main container -->
-      <div class="swiper mt-24" init="false">
-        <!-- Additional required wrapper -->
 
-        <div class="swiper-wrapper">
-          <!-- Slides -->
-          <div class="swiper-slide">projet Weather App </div>
-          <div class="swiper-slide">Fight game</div>
-          <div class="swiper-slide">Formulaire PHP</div>
 
+      <div x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 0,
+  
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 0,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 0,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 0,
+        },
+      },
+    })" class="relative w-10/12 mx-auto flex flex-row">
+        <div class="absolute inset-y-0 left-0 z-10 flex items-center">
+          <button @click="swiper.slidePrev()" class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-left w-6 h-6">
+              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
 
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-container" x-ref="container">
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide p-4">
+              <div class="flex flex-col rounded shadow overflow-hidden">
+                <div class="flex-shrink-0">
+                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt="">
+                </div>
+              </div>
+            </div>
 
-        <!-- If we need scrollbar -->
-        <div class="swiper-scrollbar"></div>
+            <div class="swiper-slide p-4">
+              <div class="flex flex-col rounded shadow overflow-hidden">
+                <div class="flex-shrink-0">
+                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1598951092651-653c21f5d0b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="">
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide p-4">
+              <div class="flex flex-col rounded shadow overflow-hidden">
+                <div class="flex-shrink-0">
+                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1598946423291-ce029c687a42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute inset-y-0 right-0 z-10 flex items-center">
+          <button @click="swiper.slideNext()" class="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-right w-6 h-6">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
+
+
     </section>
-
-
-
-    <!--Container     
-        <section id="projet" class="bk-bg-slate-300 mt-5 align-middle m-auto block">
-                
-          <span
-            class="inline-grid grid-cols-3 gap-3 text-2xl m-auto items-center">
-            <span
-              class="inline m-10 w-8 h-8 bg-sky-800 backdrop-hue-rotate-180 cursor-progress border-x-rose-500 animate-spin">
-              Projet 01</span
-            >
-            <span
-              class=" m-10 w-8 h-8 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
-              Projet 01</span
-            >
-            <span
-              class=" m-10 w-8 h-8 text-1xl bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-ping">
-              Projet 01</span
-            >
-            <span
-              class=" m-10 w-8 h-8 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-pulse">
-              Projet 01</span
-            >
-            <span
-              class=" m-10 w-8 h-8 bg-sky-800 backdrop-hue-rotate-180 cursor-progress animate-bounce">
-              Projet 01</span>
-          
-            </section>
-              visu projets -->
-
 
 
 

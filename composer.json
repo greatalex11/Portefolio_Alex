@@ -1,0 +1,17 @@
+{
+    "name": "acs/portefolio_alex-g",
+    "autoload": {
+        "psr-4": {
+            "Acs\\PortefolioAlexG\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "GreatAlex",
+            "email": "alexguerillot1@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^6.3"
+    }
+}

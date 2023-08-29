@@ -1,36 +1,16 @@
- 
-
-  const swiper = new Swiper('.swiper', {
-
-   slidesPerView: 3,
-   grid: {
-     rows: 3,
-   },
-   mousewheel: {
-     forceToAxis: true,
-   },
-
-
-  // Optional parameters
-  direction: 'vertical',
-  loop: true,
-
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
+const swiper_thumbnail = new Swiper(".swiper_thumbnail", {
+  slidesPerView: 3,
+})
+const swiper = new Swiper('.swiper_main', {
+  loop: true,                         
+  autoplay: {                         
+      delay: 2000,  
+  },                   
+  navigation: {                       
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
   },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
+  thumbs: {
+    swiper: swiper_thumbnail,
   },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-
-});
-
-
+})
