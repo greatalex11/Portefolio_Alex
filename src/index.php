@@ -3,7 +3,6 @@ require __DIR__ . './../vendor/autoload.php';
 require "repository.php";
 require "lib.php";
 
-session_start();
 $envFilePath = __DIR__ . '/.env';
 
 if (file_exists($envFilePath)) {
@@ -11,44 +10,6 @@ if (file_exists($envFilePath)) {
   $myPublicKey = $dotenvValues['myKeyPublic'];
   $myKeyPrivate = $dotenvValues['myKeyPrivate'];
 }
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (isset($_POST['recaptcha-response'])) {
-    $url = "https://www.google.com/recaptcha/api/siteverify?secret=$myKeyPrivate&response={$_POST['recaptcha-response']}";
-    $response = file_get_contents($url);
-    /*
-     if ($response) {
-        $data = json_decode($response);
-        if ($data->success) {
-           if (checkDataForm($_POST['form'])) {
-              $message = cleanDataForm($_POST['form']);
-              $message_id = saveDataForm($_POST['form']);
-
-              $sucess = "Message de {$message['name']} envoyé et sauvegardé en base avec l'id {$message_id}";
-
-              $msgBD = returMessage();
-              $nomBD = $msgBD["nom"];
-              $emailBD = $msgBD["email"];
-              $sujetBD = $msgBD["sujet"];
-              $date = $msgBD["date"];
-              $messageBD = $msgBD["message"];
-           } else {
-              header('Location: index.php?error=formulaire-pas-bon');
-           }
-  } else {
-    header('Location: index.php?error=google-false');
-  }
-} else {
-  header('Location: index.php?error=google-reponds-pas');
-};
-
-
-/* Modification message
-if (isset($_POST["id_message"])) {
-}*/
-  }
-};
 
 ?>
 
@@ -67,17 +28,14 @@ if (isset($_POST["id_message"])) {
 
 
   <link href="" rel="stylesheet" />
-  <link rel="stylesheet" href="./../dist/output.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./../dist/output.css" />
 
   <script src="index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="swiper.js"></script>
   <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
   <script type="importmap">
     {
         "imports": {
@@ -87,14 +45,16 @@ if (isset($_POST["id_message"])) {
       }
     </script>
   <script type="module" src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>Portefolio Alex G</title>
 </head>
 
 <body class="m-0">
 
-  <header class="bg-orange-300 bg-opacity-7 text-white shadow-lg hidden md:block">
-    <div class="container mx-auto flex items-center h-12">
+
+  <header class="fixed w-full h-[47px] bg-orange-300 bg-opacity-7 text-white shadow-lg hidden md:block">
+    <div class=" top-0 container mx-auto flex items-center h-12">
       <a href="" class="flex items-center justify-center">
         <img class="h-12" src="./Assets/floatin.png" alt="sphere metalique dans le desert" />
         <span class="ml-2 mr-36 text-xs uppercase font-black">Reach<br />the impossible!</span>
@@ -133,14 +93,12 @@ if (isset($_POST["id_message"])) {
   </header>
 
   <div class="quality-select">
-    <div class="bg-white w-full h-[2px] "></div>
+
   </div>
 
   <div id="terre"></div>
-  <div class="bg-white w-full h-[2px]"></div>
 
-
-  <div id="main">
+  <div id="main" class="mb-16">
     <!--Container principal-->
 
     <!--Container de mon intro -->
@@ -163,8 +121,6 @@ if (isset($_POST["id_message"])) {
 
       </div>
     </div>
-
-    <div class="bg-white w-full h-[2px]"></div>
 
     <div class="bg-slate-300 bg-opacity-70 border-x-rose-500w-screen  w-full h-[400px] flex flex-col justify-center items-center">
       <h3 class="font-screen text-2xl underline m-6 w-[600px] text-center my-4">
@@ -259,121 +215,77 @@ if (isset($_POST["id_message"])) {
 
 
     <section id="projets" class="w-screen h-[500px] mt-72 ">
-
-
-
-      <div x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 0,
-  
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 0,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 0,
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 0,
-        },
-      },
-    })" class="relative w-10/12 mx-auto flex flex-row">
-        <div class="absolute inset-y-0 left-0 z-10 flex items-center">
-          <button @click="swiper.slidePrev()" class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
-            <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-left w-6 h-6">
-              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">Slide 4</div>
+          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide">Slide 6</div>
+          <div class="swiper-slide">Slide 7</div>
+          <div class="swiper-slide">Slide 8</div>
+          <div class="swiper-slide">Slide 9</div>
         </div>
-
-        <div class="swiper-container" x-ref="container">
-          <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide p-4">
-              <div class="flex flex-col rounded shadow overflow-hidden">
-                <div class="flex-shrink-0">
-                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt="">
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide p-4">
-              <div class="flex flex-col rounded shadow overflow-hidden">
-                <div class="flex-shrink-0">
-                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1598951092651-653c21f5d0b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="">
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide p-4">
-              <div class="flex flex-col rounded shadow overflow-hidden">
-                <div class="flex-shrink-0">
-                  <img class="h-48 w-full object-cover" src="https://images.unsplash.com/photo-1598946423291-ce029c687a42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="absolute inset-y-0 right-0 z-10 flex items-center">
-          <button @click="swiper.slideNext()" class="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
-            <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-right w-6 h-6">
-              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
-        </div>
+        <div class="swiper-pagination"></div>
       </div>
-
-
-
     </section>
 
 
 
     <section id="contact">
 
-      <div class="container my-24 mx-auto md:px-6">
+      <div class=" container my-30 mx-auto md:px-6">
 
-        <!--bg-[url(https://mdbcdn.b-cdn.net/img/new/textures/full/284.jpg)]//-->
+
         <!-- Section: Design Block -->
-        <section class="mb-32">
-          <div class="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat bg-fond-redblack"></div>
+        <section class="mb-16 mt-16">
+
+          <div class="relative h-[500px] overflow-hidden bg-cover bg-[50%] bg-no-repeat bg-fond-redblack mb-[20px]"></div>
           <div class="container px-6 md:px-12">
             <div class="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.7)] dark:shadow-black/20 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
               <div class="flex flex-wrap">
                 <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
 
-                  <form action="#" method="post">
+                  <form id='contactForm' action="contact.php" method="post">
+                    <input type="hidden" id="recaptchaResponse" name="recaptcha-response">
 
                     <div class="relative mb-6" data-te-input-wrapper-init>
-                      <input type="text" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput90" placeholder="Name" />
-                      <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput90">Name
+                      <input name="form[nom]" type="text" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent  uppercase py-[1.8rem] px-10 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput90" placeholder="Nom" />
+                      <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput90">Nom
                       </label>
                     </div>
                     <div class="relative mb-6" data-te-input-wrapper-init>
-                      <input type="email" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput91" placeholder="Email address" />
-                      <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput91">Email address
+                      <input name="form[prenom]" type="text" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent capitalize py-[1.8rem] px-10 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput90" placeholder="Prénom" />
+                      <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput90">Prénom
                       </label>
                     </div>
                     <div class="relative mb-6" data-te-input-wrapper-init>
-                      <textarea class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleFormControlTextarea1" rows="3" placeholder="Your message"></textarea>
+                      <input name="form[email]" type="email" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[1.8rem] px-10 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleInput91" placeholder="Email" />
+                      <label class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary" for="exampleInput91">Email
+                      </label>
+                    </div>
+
+                    <div class="relative mb-6" data-te-input-wrapper-init>
+                      <input name="form[msg]" type="text" class="text-clip overflow-hidden  peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[1.8rem] px-10 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="exampleFormControlTextarea1" rows="3" placeholder="Your message"></textarea>
                       <label for="exampleFormControlTextarea1" class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">Message</label>
                     </div>
-                    <div class="mb-6 inline-block min-h-[1.5rem] justify-center pl-[1.5rem] md:flex">
-                      <input class="relative float-left mt-[0.15rem] mr-[6px] -ml-[1.5rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:ml-[0.25rem] checked:after:-mt-px checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-t-0 checked:after:border-l-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:ml-[0.25rem] checked:focus:after:-mt-px checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-t-0 checked:focus:after:border-l-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]" type="checkbox" value="" id="exampleCheck96" checked />
-                      <label class="inline-block pl-[0.15rem] hover:cursor-pointer" for="exampleCheck96">
-                        Envoyez-moi une copie de ce message
+
+                    <div class="mb-6 inline-block min-h-[1.5rem] justify-center  md:flex">
+                      <input type="checkbox" value="checked" name=" form[sendCopyMail] class=" relative float-left mt-[0.05rem] mr-[6px] -ml-[1.5rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:ml-[0.25rem] checked:after:-mt-px checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-t-0 checked:after:border-l-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:ml-[0.25rem] checked:focus:after:-mt-px checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-t-0 checked:focus:after:border-l-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]" type="checkbox" value="" id="exampleCheck96" checked ">
+                      <label class=" inline-block pl-[0.15rem] hover:cursor-pointer" for="exampleCheck96">
+                      Envoyez-moi une copie de ce message
                       </label>
+
                     </div>
-                    <button type="button" data-te-ripple-init data-te-ripple-color="light" class="mb-6 inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] lg:mb-0">
+                    <button id="ok" type="submit" data-te-ripple-init data-te-ripple-color="light" class="mb-6 inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-black shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] lg:mb-0">
                       Send
                     </button>
                   </form>
+                  <div style="display:none;" id="return-message" class=""></div>
                 </div>
+
+
                 <div class="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
                   <div class="flex flex-wrap">
                     <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:w-full lg:px-6 xl:w-6/12">
@@ -460,31 +372,64 @@ if (isset($_POST["id_message"])) {
         <!-- Section: Design Block -->
       </div>
 
-
-
+      <div class="bg-white w-full h-[50px]"></div>
 
     </section>
 
 
   </div>
 
-  <footer></footer>
+  <footer>
 
-  <div id="prelaod"></div>
+  </footer>
+
+
 
   <script>
-    function onClick(e) {
-      e.preventDefault();
-      grecaptcha.enterprise.ready(async () => {
-        const token = await grecaptcha.enterprise.execute('<?php $myKeyPublic ?>', {
-          action: 'LOGIN'
+    addEventListener("load", (event) => {
+      function reloadCaptcha() {
+        grecaptcha.enterprise.ready(async () => {
+          const token = await grecaptcha.enterprise.execute('<?= $myPublicKey ?>', {
+            action: 'LOGIN'
+          });
+          document.getElementById("recaptchaResponse").value = token
         });
-        // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
-        // reCAPTCHA Enterprise to the end user's browser.
-        // This token must be validated by creating an assessment.
-        // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
-      });
-    }
+      }
+      reloadCaptcha();
+
+      let contactForm = document.getElementById("contactForm");
+      contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        //creation d'une FormData API par Axios//
+
+        let data = new FormData(contactForm);
+        axios.post('contact.php', data)
+          .then(function(response) {
+            let data = response.data;
+
+
+            let returnDiv = document.getElementById("return-message");
+            console.log(data);
+            if (data.success) {
+              returnDiv.style.display = "block";
+              returnDiv.innerHTML = data.message;
+              returnDiv.classList.add("success");
+              returnDiv.classList.remove("error");
+            } else {
+              returnDiv.style.display = "block";
+              returnDiv.innerHTML = data.message;
+              returnDiv.classList.add("error");
+              returnDiv.classList.remove("success")
+            }
+          })
+          .catch(function(error) {
+
+          }).then(() => {
+            reloadCaptcha();
+          });
+      })
+    })
   </script>
 
 

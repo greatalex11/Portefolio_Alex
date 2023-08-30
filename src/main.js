@@ -75,9 +75,9 @@ function createPathStrings(filename) {
    const materialAG = new THREE.TextureLoader().load('./img/profileAlex.png');
    var materialCubeAG = new THREE.MeshBasicMaterial({ map: materialAG });
    cube2= new THREE.Mesh(AlexMap,materialCubeAG);   
-   cube2.position.x = 69;
-   cube2.position.y = 24;
-   cube2.position.z = -65;
+   cube2.position.x = 65;
+   cube2.position.y = 10;
+   cube2.position.z = -70;
    scene.add(cube2);
 
  }

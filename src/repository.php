@@ -4,7 +4,7 @@
 function connexionBD(): ?PDO
 {
    $servname = 'localhost';
-   $dbname = 'formulairephp2';
+   $dbname = 'portefolio';
    $user = 'alex';
    $pass = 'alex';
 
@@ -13,6 +13,7 @@ function connexionBD(): ?PDO
       $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $dbco;
    } catch (PDOException $e) {
+      var_dump($e);
       return null;
    }
 }
@@ -20,13 +21,12 @@ function connexionBD(): ?PDO
 function saveDataForm($data): int
 {
    $dbco = connexionBD();
-   $sth = $dbco->prepare("INSERT INTO message(nom,email,sujet,message,date)
-                        VALUES(:nom,:email,:sujet,:message,:date)");
+   $sth = $dbco->prepare("INSERT INTO message(nom, prenom, email, message,date) VALUES(:nom,:prenom,:email,:message,:date)");
 
    $sth->execute(array(
-      ":nom" => $data["name"],
+      ":nom" => $data["nom"],
+      ":prenom" => $data["prenom"],
       ":email" =>  $data["email"],
-      ":sujet" => $data["subject"],
       ":message" => $data["msg"],
       ":date" => date("Y-m-d"),
    ));
@@ -34,13 +34,10 @@ function saveDataForm($data): int
 }
 
 
-
-
-
 function returMessage(): array
 {
    $dbco = connexionBD();
-   $sth = $dbco->prepare("SELECT * FROM message ORDER BY id_contact DESC LIMIT 1");
+   $sth = $dbco->prepare("SELECT * FROM message ORDER BY id DESC LIMIT 1");
    $sth->execute();
    $result = $sth->fetch(PDO::FETCH_ASSOC);
 
