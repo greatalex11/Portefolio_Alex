@@ -71,13 +71,13 @@ function createPathStrings(filename) {
    sphere = new THREE.Mesh(geometry, material);
 
    
-   let AlexMap = new THREE.BoxGeometry(12, 12, 12);
+   let AlexMap = new THREE.BoxGeometry(18, 18, 18);
    const materialAG = new THREE.TextureLoader().load('./img/profileAlex.png');
    var materialCubeAG = new THREE.MeshBasicMaterial({ map: materialAG });
    cube2= new THREE.Mesh(AlexMap,materialCubeAG);   
    cube2.position.x = 65;
    cube2.position.y = 10;
-   cube2.position.z = -70;
+   cube2.position.z = -60;
    scene.add(cube2);
 
  }

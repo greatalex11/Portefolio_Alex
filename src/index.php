@@ -11,6 +11,13 @@ if (file_exists($envFilePath)) {
   $myKeyPrivate = $dotenvValues['myKeyPrivate'];
 }
 
+$file = $get["AGuerillotCV"] . ".pdf";
+header("Content-Type: application/octet-stream");
+header('Content-Disposition: attachment; filename="AGuerillotCV.pdf"');
+header("Content-Length: " . filesize($file));
+readfile($file);
+
+
 ?>
 
 
@@ -62,17 +69,17 @@ if (file_exists($envFilePath)) {
       <nav class="contents font-semibold text-base lg:text-lg">
         <ul class="mx-auto flex items-center">
           <li class="p-5 xl:p-8 active">
-            <a href="">
+            <a href="#main">
               <span>Home</span>
             </a>
           </li>
           <li class="p-5 xl:p-8">
-            <a href="">
+            <a href="#resume">
               <span>About</span>
             </a>
           </li>
           <li class="p-5 xl:p-8">
-            <a href="">
+            <a href="#projets">
               <span>Projects</span>
             </a>
           </li>
@@ -81,14 +88,17 @@ if (file_exists($envFilePath)) {
               <span>Services</span>
             </a>
           </li>
-          <li class="p-5 xl:p-8">
-            <a href="">
-              <span>Blog</span>
-            </a>
-          </li>
+          <!--
+            
+            <li class="p-5 xl:p-8">
+              <a href="">
+                <span>Blog</span>
+              </a>
+            </li>
+          -->
         </ul>
       </nav>
-      <button class="border border-white rounded-full font-bold px-9 py-1">Contact me</button>
+      <a href="#contact" class="border border-white rounded-full font-bold px-9 py-1">Contact me</a>
     </div>
   </header>
 
@@ -126,7 +136,7 @@ if (file_exists($envFilePath)) {
       <h3 class="font-screen text-2xl underline m-6 w-[600px] text-center my-4">
         Résumé
       </h3>
-      <p class="font-dev tracking-wider text-justify w-[600px] leading-10 decoration-solid indent-8">
+      <p id="resume" class="font-dev tracking-wider text-justify w-[600px] leading-10 decoration-solid indent-8">
 
         J'ai choisi le métier de Développeur
         Web pour la créativité et la rigueur nécessaire à la mise en oeuvre de
@@ -144,7 +154,7 @@ if (file_exists($envFilePath)) {
     <div id="competences-animation" class="w-full h-[700px] flex flex-col justify-items-center align-middle m-auto p-16">
 
       <div class="text-center">
-        <h3 class="font-screen inline text-2xl underline m-auto w-[600px] text-center my-4 ">
+        <h3 class="font-screen inline text-2xl underline m-auto w-[600px] text-center my-4 mb-12">
           Compétences
         </h3>
       </div>
@@ -153,7 +163,7 @@ if (file_exists($envFilePath)) {
 
       <div id="indicateurCompetences" class=" flex flex-row  m-auto">
 
-        <div id="competences" class="animate w-1/2 h-auto relative left-[150px] m-auto ">
+        <div id="competences" class="animate w-1/2 h-auto relative left-[100px] m-auto ">
 
           <span style=" --i: 0">
             <p>JS</p>
@@ -201,9 +211,36 @@ if (file_exists($envFilePath)) {
 
         </div>
 
-        <div id="explication" class="w-1/2 text-justify mt-auto mb-auto  p-10 indent-8">
-          Inter has ruinarum varietates a Nisibi quam tuebatur accitus Vrsicinus, cui nos obsecuturos iunxerat imperiale praeceptum, dispicere litis exitialis certamina cogebatur abnuens et reclamans, adulatorum oblatrantibus turmis, bellicosus sane milesque semper et militum ductor sed forensibus iurgiis longe discretus, qui metu sui discriminis anxius cum accusatores quaesitoresque subditivos sibi consociatos ex isdem foveis cerneret emergentes, quae clam palamve agitabantur,
-          occultis Constantium litteris edocebat inplorans subsidia, quorum metu tumor notissimus Caesaris exhalaret.
+        <div id="explication" class="text-lg w-1/3 h-a text-justify mt-auto mb-auto  p-10 indent-8 item-start mt-10">
+          Issu de l'industrie, j'ai commencé mon parcours professionnel dans la maintenance.
+          La rigueur et la maîtrise technique m'ont permis par la suite de gérer des projets d'amélioration continue.
+          Soucieux de développer mon sens du relationnel, j'ai par la suite mutliplié les mises en situation dans le conseil et le service.
+
+
+
+          <div id="technique" class="inline-flex max-w-xl item-start mt-10">
+            <p class="w-1/2"><img src="./Assets/icones/TECHNIQUE.png" alt="icone technique" width="110" height="110"></p>
+            <p class="w-1/2 justify-items-start text-left align-middle  m-auto">Veille technologique Management des compétences</p>
+          </div>
+
+          <div id="projet" class="inline-flex max-w-xl item-start">
+            <p class="w-1/2"><img src="./assets/icones/PROJET.png" alt="icone projet" width="110" height="110"></p>
+            <p class="w-4/5   justify-items-start text-left align-middle  m-auto">Gestion de projets en mode matriciel</p>
+          </div>
+
+
+
+          <div id="team" class="inline-flex flex-wrap max-w-xl item-start">
+            <p class="w-1/2"><img src="./Assets/icones/MANAGEMENTT.png" alt="icone managmeent" width="110" height="110"></p>
+            <p class="w-1/2 justify-items-start text-left align-middle  m-auto">Capacité travailler en équipe</p>
+          </div>
+
+
+          <a class="text-lg" href="../AGuerillotCV.pdf?file=AGuerillotCV.pdf">Téléchargez mon cv</a>
+
+
+
+
         </div>
 
       </div>
@@ -217,9 +254,9 @@ if (file_exists($envFilePath)) {
 
 
 
-    <section id="projets" class="w-2/5 h-auto mt-72 m-auto p-10">
+    <section id="projets" class="w-2/5 h-auto m-auto p-10 mt-44">
 
-      <h3 class="font-screen block text-2xl underline text-center w-full m-auto mb-20">
+      <h3 class="font-screen block text-2xl underline text-center w-full m-auto  mt-48 mb-16">
         Mes projets
       </h3>
 
@@ -227,13 +264,15 @@ if (file_exists($envFilePath)) {
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="./Assets/weatherApp.png "> </div>
           <div class="swiper-slide"><img src="./Assets/GameJam.png "></div>
-          <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
-          <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
+          <div class="swiper-slide"><img src="./Assets/Battle.png "></div>
+          <div class="swiper-slide"><img src="./Assets/delOliv.png "></div>
+          <!--
           <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
           <div class="swiper-slide">Slide 6</div>
           <div class="swiper-slide">Slide 7</div>
           <div class="swiper-slide">Slide 8</div>
           <div class="swiper-slide">Slide 9</div>
+          -->
         </div>
         <div class="swiper-pagination"></div>
       </div>
