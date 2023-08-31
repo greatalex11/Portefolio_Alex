@@ -210,18 +210,26 @@ if (file_exists($envFilePath)) {
 
 
 
-
     </div>
 
 
-    <section id="projets" class="w-screen h-[500px] mt-72 ">
+
+
+
+
+    <section id="projets" class="w-2/5 h-auto mt-72 m-auto p-10">
+
+      <h3 class="font-screen block text-2xl underline text-center w-full m-auto mb-20">
+        Mes projets
+      </h3>
+
       <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">Slide 1</div>
-          <div class="swiper-slide">Slide 2</div>
-          <div class="swiper-slide">Slide 3</div>
-          <div class="swiper-slide">Slide 4</div>
-          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide"><img src="./Assets/weatherApp.png "> </div>
+          <div class="swiper-slide"><img src="./Assets/GameJam.png "></div>
+          <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
+          <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
+          <div class="swiper-slide"><img src="./Assets/weatherApp.png "></div>
           <div class="swiper-slide">Slide 6</div>
           <div class="swiper-slide">Slide 7</div>
           <div class="swiper-slide">Slide 8</div>
@@ -235,7 +243,7 @@ if (file_exists($envFilePath)) {
 
     <section id="contact">
 
-      <div class=" container my-30 mx-auto md:px-6">
+      <div class=" container mt-72 my-30 mx-auto md:px-6">
 
 
         <!-- Section: Design Block -->
@@ -416,6 +424,14 @@ if (file_exists($envFilePath)) {
               returnDiv.innerHTML = data.message;
               returnDiv.classList.add("success");
               returnDiv.classList.remove("error");
+
+              if (form['sendCopyMail']) {
+                let formDisplay = form.getElementById("contactForm");
+                formDisplay.style.display = "none";
+                let divRetourmail = document.createElement("div", "p");
+                divRetourmail.innerHTML = data.confirmation;
+              }
+
             } else {
               returnDiv.style.display = "block";
               returnDiv.innerHTML = data.message;
