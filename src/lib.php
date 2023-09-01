@@ -44,15 +44,15 @@ function cleanDataForm($data): array
    return $data;
 }
 
-function copyToMail($data)
+function sendMail($data)
 {
-   if ($data["sendCopyMail"]) {
-      mail(
-         $data['email'],
-         $data["nom"],
-         $data["prenom"],
-         $data["msg"],
-      );
-      echo "Un mail de confirmation vient de vous être envoyé";
-   }
+   mail(
+      $data['email'],
+      "Contact depuis mon portfolio",
+      "Un message de ${data['nom']} ${data['prenom']} à été envoyé depuis le portfolio.
+
+Le contenu du mesage est :
+${data['msg']}
+      "
+   );
 }

@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['recaptcha-response']))
    // j'envois la requeste que j'ai créer a google et je stock la reponse
    $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify', false, $context);
    if ($response) {
+
       $data = json_decode($response);
 
       if ($data->success) {
@@ -46,10 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['recaptcha-response']))
             if (empty($errors)) {
                $message = cleanDataForm($_POST['form']);
                $message_id = saveDataForm($_POST['form']);
-               $sucess = "Message de {$message['nom']} envoyé et sauvegardé en base avec l'id {$message_id}";
-               copyToMail($message);
-               //mail de confirmation envoyé
 
+               if (isset($message["sendCopyMail"])) {
+                  //mail de confirmation envoyé
+                  sendMail($message);
+                  $sucess = "Message de {$message['nom']} envoyé et sauvegardé en base avec l'id {$message_id} et une copie a été envoyé par mail a l'adresse {$message['email']}";
+               } else {
+                  $sucess = "Message de {$message['nom']} envoyé et sauvegardé en base avec l'id {$message_id}";
+               }
 
                $msgBD = returMessage();
                $nomBD = $msgBD["nom"];
@@ -59,9 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['recaptcha-response']))
                $messageBD = $msgBD["message"];
                // retour BD :dernier enregistrement
 
-               echo json_encode(["success" => true, "message" => $sucess]);
-               echo json_encode(["success" => true, "confirmation" => $messageBD, $date, $emailBD]);
-               //Affichage d'une fenêtre de récap
+               echo json_encode(["success" => true, "message" => $sucess, "confirmation" => [$messageBD, $date, $emailBD]]);
                return;
             } else {
                echo json_encode(["success" => false, "message" => $errors]);
